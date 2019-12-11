@@ -48,7 +48,7 @@ try {
 }
 
 # Define Functions
-function register() {
+function register($conn) {
     # Get Inputs
     $username = $_POST['username'];
     $password = md5($_POST['password']);
@@ -67,7 +67,7 @@ function register() {
     die("Success");
 }
     
-function login() {
+function login($conn) {
     # Get Inputs
     $username = $_POST['username'];
     $password = md5($_POST['password']);
@@ -102,7 +102,7 @@ function login() {
     }    
 }
 
-function session() {
+function session($conn) {
     # Get Inputs
     $uuid = $_POST['uuid'];
     
@@ -139,12 +139,12 @@ function session() {
 }
 
 # Find Choice and Run the Relevant Function
-if ($choice = 'session') {
-    session();
-} elseif ($choice = 'login') {
-    login();
-} elseif ($choice = 'register') {
-    register();
+if ($choice == 'session') {
+    session($conn);
+} elseif ($choice == 'login') {
+    login($conn);
+} elseif ($choice == 'register') {
+    register($conn);
 } else {
     die("Invalid Choice"); 
 }
