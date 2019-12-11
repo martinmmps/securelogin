@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Copyright © 2019 Martin Perreau-Saussine
 Secure Login System:
     Call Script with POST Values:
@@ -27,8 +28,7 @@ username - varchar - length: 255
 password - varchar - length: 255
 uuid - varchar - length: 255
 uuidset - datetime
--->
-<?php
+*/
 # Get Input
 $choice = $_POST['mode'];
 
