@@ -30,7 +30,7 @@ uuid - varchar - length: 255
 uuidset - datetime
 */
 # Get Input
-$choice = $_POST['mode'];
+$choice = htmlspecialchars($_POST['mode']);
 
 # SQL Server Address
 $sqlname = "localhost";
@@ -48,14 +48,17 @@ try {
 }
 
 # Define Functions
-function register($conn) {
+function register() {
+    # Define Globals
+    global $conn;
+    
     # Get Inputs
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);
+    $username = htmlspecialchars($_POST['username']);
+    $password = md5(htmlspecialchars($_POST['password']));
     
     # Check that username and password were supplied
     if (!$username || !$password) {
-        die("Fatal Error: Username or Password not supplied");
+        die("Username or Password not supplied");
     }
     
     # Insert Values into Database
@@ -67,10 +70,13 @@ function register($conn) {
     die("Success");
 }
     
-function login($conn) {
+function login() {
+    # Define Globals
+    global $conn;
+    
     # Get Inputs
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);
+    $username = htmlspecialchars($_POST['username']);
+    $password = md5(htmlspecialchars($_POST['password']));
     
     # Check that the username and password were supplied
     if (!$username || !$password) {
@@ -102,9 +108,12 @@ function login($conn) {
     }    
 }
 
-function session($conn) {
+function session() {
+    # Define Globals
+    global $conn;
+    
     # Get Inputs
-    $uuid = $_POST['uuid'];
+    $uuid = htmlspecialchars($_POST['uuid']);
     
     # Get Results from Database
     $stmt = $conn->prepare("SELECT * FROM `users` WHERE uuid = :uuid");
@@ -140,11 +149,11 @@ function session($conn) {
 
 # Find Choice and Run the Relevant Function
 if ($choice == 'session') {
-    session($conn);
+    session();
 } elseif ($choice == 'login') {
-    login($conn);
+    login();
 } elseif ($choice == 'register') {
-    register($conn);
+    register();
 } else {
     die("Invalid Choice"); 
 }
