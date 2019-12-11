@@ -1,11 +1,8 @@
 <!--
 Copyright © 2019 Martin Perreau-Saussine
-everyone is permitted to copy and distribute verbatim copies
-of this script, but changing it is not allowed.
----------------------------------------------------------
 Secure Login System:
     Call Script with POST Values:
-    choice
+    mode
         session
             INPUT
                 uuid
